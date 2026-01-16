@@ -317,6 +317,10 @@ class ObsClient
             $this->pathStyle = true;
         }
 
+        if (isset($config['request_headers'])) {
+            $this->requestHeaders = $config['request_headers'];
+        }        
+
         $handler = self::chooseHandler($this);
 
         $this->httpClient = self::createHttpClient($handler);
@@ -336,9 +340,11 @@ class ObsClient
                 'curl' => [
                     CURLOPT_BUFFERSIZE => $this->chunkSize,
                 ],
+                'headers' => $this->requestHeaders ?? [],
             ]
         );
     }
+    
     public function __destruct()
     {
         $this->close();
