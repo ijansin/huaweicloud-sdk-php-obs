@@ -237,6 +237,8 @@ class ObsClient
 
     private $factorys;
 
+    protected $requestHeaders;    
+
     public function __construct(array $config = [])
     {
         $this->factorys = [];
